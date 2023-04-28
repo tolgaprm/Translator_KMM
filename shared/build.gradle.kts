@@ -87,3 +87,10 @@ android {
         minSdk = 24
     }
 }
+
+sqldelight {
+    database("TranslatorDatabase") {
+        packageName = "com.prmto.translator.database"
+        sourceFolders = listOf("sqldelight")
+    }
+}
