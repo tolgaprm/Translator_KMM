@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -46,8 +47,12 @@ fun LanguageDropDown(
                     onClick = {
                         onSelectLanguage(language)
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(4.dp))
                 )
+                Divider()
             }
         }
 
