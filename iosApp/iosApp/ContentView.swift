@@ -4,8 +4,12 @@ import shared
 struct ContentView: View {
 
 	var body: some View {
-		Text("as")
-	}
+        VStack{
+            Spacer()
+            Text("as").foregroundColor(.primary)
+            Spacer()
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
