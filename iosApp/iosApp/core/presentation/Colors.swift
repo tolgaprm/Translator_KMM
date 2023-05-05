@@ -29,7 +29,7 @@ extension Color{
     static let darkGrey = Color(hex: colors.DarkGrey)
     
     
-    static let primary = Color(light: .accentViolent, dark: .accentViolent)
+    static let primaryColor = Color(light: .accentViolent, dark: .accentViolent)
     static let backgroundColor = Color(light: .lightBlueGrey, dark: .darkGrey)
     static let onPrimary = Color(light: .white, dark: .white)
     static let onBackground = Color(light: .textBlack, dark: .white)
