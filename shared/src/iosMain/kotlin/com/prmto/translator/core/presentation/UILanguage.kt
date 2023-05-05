@@ -18,7 +18,7 @@ actual class UiLanguage(
                     language = language,
                     imageName = language.langName.lowercase()
                 )
-            }.sortedByDescending { it.language.langName }
+            }.sortedBy { it.language.langName }
     }
 
 }

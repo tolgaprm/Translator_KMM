@@ -16,6 +16,9 @@
 		E0EB8DBC2A040270001D6568 /* LanguageDropDownItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EB8DBB2A040270001D6568 /* LanguageDropDownItem.swift */; };
 		E0EB8DBF2A040A09001D6568 /* LanguageDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EB8DBE2A040A09001D6568 /* LanguageDropDown.swift */; };
 		E0EB8DC12A040CB6001D6568 /* SmalLanguageIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EB8DC02A040CB6001D6568 /* SmalLanguageIcon.swift */; };
+		E0EB8DC32A0416BF001D6568 /* SwapLanguageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EB8DC22A0416BF001D6568 /* SwapLanguageButton.swift */; };
+		E0EB8DC52A0417FE001D6568 /* IOSTranslateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EB8DC42A0417FE001D6568 /* IOSTranslateViewModel.swift */; };
+		E0EB8DC72A041868001D6568 /* TranslateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EB8DC62A041868001D6568 /* TranslateScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		E0EB8DBB2A040270001D6568 /* LanguageDropDownItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDropDownItem.swift; sourceTree = "<group>"; };
 		E0EB8DBE2A040A09001D6568 /* LanguageDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDropDown.swift; sourceTree = "<group>"; };
 		E0EB8DC02A040CB6001D6568 /* SmalLanguageIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmalLanguageIcon.swift; sourceTree = "<group>"; };
+		E0EB8DC22A0416BF001D6568 /* SwapLanguageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapLanguageButton.swift; sourceTree = "<group>"; };
+		E0EB8DC42A0417FE001D6568 /* IOSTranslateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSTranslateViewModel.swift; sourceTree = "<group>"; };
+		E0EB8DC62A041868001D6568 /* TranslateScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				E0EB8DBA2A040236001D6568 /* components */,
+				E0EB8DC42A0417FE001D6568 /* IOSTranslateViewModel.swift */,
+				E0EB8DC62A041868001D6568 /* TranslateScreen.swift */,
 			);
 			path = presentation;
 			sourceTree = "<group>";
@@ -141,6 +149,7 @@
 				E0EB8DBB2A040270001D6568 /* LanguageDropDownItem.swift */,
 				E0EB8DBE2A040A09001D6568 /* LanguageDropDown.swift */,
 				E0EB8DC02A040CB6001D6568 /* SmalLanguageIcon.swift */,
+				E0EB8DC22A0416BF001D6568 /* SwapLanguageButton.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -281,8 +290,11 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				E0EB8DBC2A040270001D6568 /* LanguageDropDownItem.swift in Sources */,
 				E0EB8DBF2A040A09001D6568 /* LanguageDropDown.swift in Sources */,
+				E0EB8DC52A0417FE001D6568 /* IOSTranslateViewModel.swift in Sources */,
 				E0EB8DB72A03F7E7001D6568 /* Colors.swift in Sources */,
+				E0EB8DC32A0416BF001D6568 /* SwapLanguageButton.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				E0EB8DC72A041868001D6568 /* TranslateScreen.swift in Sources */,
 				E0EB8DC12A040CB6001D6568 /* SmalLanguageIcon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
