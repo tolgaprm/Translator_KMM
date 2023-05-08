@@ -15,4 +15,5 @@
     <string name="server_error">Oops, an error happened. Please try again later.</string>
     <string name="unknown_error">"Oops, unknown error happened. "</string>
     <string name="record_audio">Record Audio</string>
+    <string name="error_speech_recognition_unavaliable">Speech recognition is not available\n</string>
 </resources>
