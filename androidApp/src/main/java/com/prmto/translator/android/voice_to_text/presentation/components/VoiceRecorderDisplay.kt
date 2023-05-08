@@ -1,5 +1,6 @@
 package com.prmto.translator.android.voice_to_text.presentation.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,6 +28,7 @@ fun VoiceRecorderDisplay(
     modifier: Modifier = Modifier,
 ) {
     val primary = MaterialTheme.colors.primary
+    Log.d("VoiceRecorderDisplay", "powerRatios: $powerRatios")
     Box(
         modifier = modifier
             .shadow(
@@ -41,7 +43,7 @@ fun VoiceRecorderDisplay(
             )
             .drawBehind {
                 val powerRatioWidth = 3.dp.toPx() // Canvas deals with pixel value
-                val powerRatioCount = (size.width / (powerRatioWidth * 2)).toInt()
+                val powerRatioCount = (size.width / (2 * powerRatioWidth)).toInt()
                 // The count of power ratios we can draw on the canvas
                 // The reason we divide by 2 is because we want to leave some space between each bar
 
@@ -56,7 +58,7 @@ fun VoiceRecorderDisplay(
                         .takeLast(powerRatioCount)
                         .reversed()
                         .forEachIndexed { i, ratio ->
-                            val yTopStart = center.y - (size.height / 2) * ratio
+                            val yTopStart = center.y - (size.height / 2f) * ratio
                             drawRoundRect(
                                 color = primary,
                                 topLeft = Offset(
@@ -65,16 +67,14 @@ fun VoiceRecorderDisplay(
                                 ),
                                 size = Size(
                                     width = powerRatioWidth,
-                                    height = (center.y - yTopStart) * 2
+                                    height = (center.y - yTopStart) * 2f
                                 ),
                                 cornerRadius = CornerRadius(100f)
                             )
                         }
                 }
             }
-    ) {
-
-    }
+    )
 }
 
 

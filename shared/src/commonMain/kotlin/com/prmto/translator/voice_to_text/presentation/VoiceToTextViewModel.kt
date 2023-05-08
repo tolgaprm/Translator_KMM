@@ -22,9 +22,13 @@ class VoiceToTextViewModel(
     val state = _state.combine(parser.state) { state, voiceResult ->
         state.copy(
             spokenText = voiceResult.result,
-            recordError = voiceResult.error,
+            recordError = if (state.canRecord) {
+                voiceResult.error
+            } else {
+                "Can't record without permission"
+            },
             displayState = when {
-                voiceResult.error != null -> DisplayState.ERROR
+                !state.canRecord || voiceResult.error != null -> DisplayState.ERROR
                 voiceResult.result.isNotBlank() && !voiceResult.isSpeaking -> DisplayState.DISPLAYING_RESULTS
                 voiceResult.isSpeaking -> DisplayState.SPEAKING
                 else -> DisplayState.WAITING_TO_TALK
@@ -39,7 +43,7 @@ class VoiceToTextViewModel(
                 if (state.value.displayState == DisplayState.SPEAKING) {
                     _state.update {
                         it.copy(
-                            powerRatios = it.powerRatios + state.value.powerRatios
+                            powerRatios = it.powerRatios + parser.state.value.powerRatio
                         )
                     }
                 }
@@ -65,6 +69,7 @@ class VoiceToTextViewModel(
     }
 
     private fun toggleRecording(languageCode: String) {
+        _state.update { it.copy(powerRatios = emptyList()) }
         parser.cancel()
         if (state.value.displayState == DisplayState.SPEAKING) {
             parser.stopListening()
