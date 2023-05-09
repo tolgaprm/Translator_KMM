@@ -11,7 +11,7 @@ import shared
 import UniformTypeIdentifiers
 
 struct TranslateTextField: View {
-   @Binding var fromText: String
+    @Binding var fromText: String
     let toText: String?
     let isTranslating: Bool
     let fromLanguage: UiLanguage
@@ -87,7 +87,8 @@ private extension TranslateTextField {
                         isLoading: isTranslating,
                         onClick: {
                             onTranslateEvent(TranslateEvent.Translate())
-                        })
+                        }
+                    )
                 }
                 .padding(.trailing)
                 .padding(.bottom)
