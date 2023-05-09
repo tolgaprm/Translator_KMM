@@ -12,6 +12,7 @@ import shared
 struct TranslateScreen: View {
     private var historyDataSource: HistoryDataSource
     private var translateUseCase: TranslateUseCase
+    private let parser = IOSVoiceToTextParser()
     @ObservedObject var viewModel: IOSTranslateViewModel
     
     init(historyDataSource: HistoryDataSource, translateUseCase: TranslateUseCase) {
@@ -90,7 +91,15 @@ struct TranslateScreen: View {
             
             VStack{
                 Spacer()
-                NavigationLink(destination: Text("Voice-to-text Screen")){
+                NavigationLink(
+                    destination: VoiceToTextScreen(
+                        onResult: {spokenText in
+                            viewModel.onEvent(event: TranslateEvent.SubmitVoiceResult(result: spokenText))
+                        },
+                        parser: parser,
+                        languageCode: viewModel.state.fromLanguage.language.langCode
+                    )
+                ){
                     ZStack{
                         Circle()
                             .foregroundColor(.primaryColor)

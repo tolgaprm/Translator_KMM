@@ -13,7 +13,7 @@ import Combine
 
 extension VoiceToTextScreen{
    @MainActor class IOSVoiceToTextViewModel : ObservableObject{
-        private let parser: VoiceToTextParser
+        private let parser: any VoiceToTextParser
         private let languageCode: String
        
         private let viewModel: VoiceToTextViewModel
@@ -32,6 +32,7 @@ extension VoiceToTextScreen{
             self.parser = parser
             self.languageCode = languageCode
             self.viewModel = VoiceToTextViewModel(parser: parser, coroutineScope: nil)
+           self.viewModel.onEvent(event: VoiceToTextEvent.PermissionResult(isGranted: true, isPermanentlyDeclined: false))
         }
         
         func onEvent(event:VoiceToTextEvent){
