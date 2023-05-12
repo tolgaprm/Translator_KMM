@@ -10,7 +10,8 @@ object Deps {
     const val composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
     const val composeFoundation = "androidx.compose.foundation:foundation:$composeVersion"
     const val composeMaterial = "androidx.compose.material:material:$composeVersion"
-    const val composeIconsExtended = "androidx.compose.material:material-icons-extended:$composeVersion"
+    const val composeIconsExtended =
+        "androidx.compose.material:material-icons-extended:$composeVersion"
 
     private const val composeNavigationVersion = "2.5.3"
     const val composeNavigation = "androidx.navigation:navigation-compose:$composeNavigationVersion"
@@ -46,7 +47,8 @@ object Deps {
     const val androidBuildTools = "com.android.tools.build:gradle:$gradleVersion"
 
     private const val sqlDelightGradleVersion = "1.5.3"
-    const val sqlDelightGradlePlugin = "com.squareup.sqldelight:gradle-plugin:$sqlDelightGradleVersion"
+    const val sqlDelightGradlePlugin =
+        "com.squareup.sqldelight:gradle-plugin:$sqlDelightGradleVersion"
 
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
 
@@ -55,7 +57,8 @@ object Deps {
     const val sqlDelightRuntime = "com.squareup.sqldelight:runtime:$sqlDelightVersion"
     const val sqlDelightAndroidDriver = "com.squareup.sqldelight:android-driver:$sqlDelightVersion"
     const val sqlDelightNativeDriver = "com.squareup.sqldelight:native-driver:$sqlDelightVersion"
-    const val sqlDelightCoroutinesExtensions = "com.squareup.sqldelight:coroutines-extensions:$sqlDelightVersion"
+    const val sqlDelightCoroutinesExtensions =
+        "com.squareup.sqldelight:coroutines-extensions:$sqlDelightVersion"
 
     // TESTING
     private const val assertKVersion = "0.25"
@@ -74,4 +77,8 @@ object Deps {
     const val composeTestManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
 
     const val hiltTesting = "com.google.dagger:hilt-android-testing:$hiltVersion"
+
+    // For handling permissions in tests
+    private const val rulesVersion = "1.4.0"
+    const val rules = "androidx.test:rules:$rulesVersion"
 }
