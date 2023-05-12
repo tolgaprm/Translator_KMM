@@ -37,12 +37,16 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.prmto.translator.android.R
 import com.prmto.translator.android.core.theme.LightBlue
+import com.prmto.translator.android.core.util.TestTags
 import com.prmto.translator.core.presentation.UiLanguage
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun TranslateTextField(
     fromText: String,
@@ -189,10 +193,13 @@ private fun IdleTranslateTextField(
             cursorBrush = SolidColor(MaterialTheme.colors.primary),
             modifier = Modifier
                 .fillMaxSize()
-                .onFocusChanged { isFocused = it.isFocused },
+                .onFocusChanged { isFocused = it.isFocused }
+                .semantics {
+                    testTag = TestTags.translateTextField
+                },
             textStyle = TextStyle(
                 color = MaterialTheme.colors.onSurface
-            )
+            ),
         )
         if (fromText.isEmpty() && !isFocused) {
             Text(

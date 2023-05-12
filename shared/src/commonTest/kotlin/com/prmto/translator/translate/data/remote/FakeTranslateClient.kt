@@ -3,7 +3,8 @@ package com.prmto.translator.translate.data.remote
 import com.prmto.translator.core.domain.language.Language
 import com.prmto.translator.translate.domain.translate.TranslateClient
 
-class FakeTranslateClient : TranslateClient {
+
+open class FakeTranslateClient : TranslateClient {
 
     var translatedText = "test translation"
     override suspend fun translate(

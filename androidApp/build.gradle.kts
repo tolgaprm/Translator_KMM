@@ -70,4 +70,6 @@ dependencies {
     kaptAndroidTest(Deps.hiltAndroidCompiler)
     androidTestImplementation(Deps.hiltTesting)
     androidTestImplementation(Deps.rules)
+    androidTestImplementation(Deps.turbine)
+    androidTestImplementation(Deps.truth)
 }

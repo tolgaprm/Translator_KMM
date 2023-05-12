@@ -21,10 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.prmto.translator.android.R
 import com.prmto.translator.android.core.theme.LightBlue
+import com.prmto.translator.android.core.util.TestTags
 import com.prmto.translator.core.presentation.UiLanguage
 
 @Composable
@@ -51,6 +54,10 @@ fun LanguageDropDown(
                         .padding(4.dp)
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(4.dp))
+                        .semantics {
+                            testTag =
+                                "${TestTags.languageDropDownItem}${language.language.langCode}"
+                        }
                 )
                 Divider()
             }

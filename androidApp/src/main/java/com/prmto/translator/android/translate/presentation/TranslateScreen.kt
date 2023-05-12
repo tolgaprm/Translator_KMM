@@ -28,9 +28,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import com.prmto.translator.android.R
+import com.prmto.translator.android.core.util.TestTags
 import com.prmto.translator.android.translate.presentation.components.LanguageDropDown
 import com.prmto.translator.android.translate.presentation.components.SwapLanguagesButton
 import com.prmto.translator.android.translate.presentation.components.TranslateHistoryItem
@@ -111,12 +114,17 @@ fun TranslateScreen(
                         },
                         onSelectLanguage = {
                             onEvent(TranslateEvent.ChooseFromLanguage(it))
+                        },
+                        modifier = Modifier.semantics {
+                            contentDescription = TestTags.fromDropdown
                         }
                     )
                     Spacer(modifier = Modifier.weight(1f))
-                    SwapLanguagesButton(onClick = {
-                        onEvent(TranslateEvent.SwapLanguages)
-                    })
+                    SwapLanguagesButton(
+                        onClick = {
+                            onEvent(TranslateEvent.SwapLanguages)
+                        }
+                    )
                     Spacer(modifier = Modifier.weight(1f))
                     LanguageDropDown(
                         language = state.toLanguage,
@@ -129,6 +137,9 @@ fun TranslateScreen(
                         },
                         onSelectLanguage = {
                             onEvent(TranslateEvent.ChooseToLanguage(it))
+                        },
+                        modifier = Modifier.semantics {
+                            contentDescription = TestTags.toDropdown
                         }
                     )
                 }
@@ -177,7 +188,8 @@ fun TranslateScreen(
                     onTextFieldClick = {
                         onEvent(TranslateEvent.EditTranslation)
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                 )
             }
             item {

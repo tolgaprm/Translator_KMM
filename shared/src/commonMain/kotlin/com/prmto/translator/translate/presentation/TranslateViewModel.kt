@@ -209,8 +209,5 @@ class TranslateViewModel(
                 }
             }
         }
-
-
     }
-
 }

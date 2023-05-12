@@ -4,9 +4,11 @@ import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
+import assertk.assertions.isNotNull
 import assertk.assertions.isTrue
 import com.prmto.translator.core.presentation.UiLanguage
 import com.prmto.translator.translate.data.local.FakeHistoryDataSource
+import com.prmto.translator.translate.data.remote.FakeErrorTranslateClient
 import com.prmto.translator.translate.data.remote.FakeTranslateClient
 import com.prmto.translator.translate.domain.history.HistoryItem
 import com.prmto.translator.translate.domain.translate.TranslateUseCase
@@ -80,6 +82,34 @@ class TranslateViewModelTest {
             assertThat(resultState.isTranslating).isFalse()
             assertThat(resultState.toText).isEqualTo(client.translatedText)
 
+        }
+    }
+
+    @Test
+    fun `Translate Error - state properly updated`() = runBlocking {
+        client = FakeErrorTranslateClient()
+        val translateUseCase = TranslateUseCase(
+            client = client,
+            historyDataSource = dataSource
+        )
+        viewModel = TranslateViewModel(
+            translateUseCase = translateUseCase,
+            historyDataSource = dataSource,
+            coroutineScope = CoroutineScope(Dispatchers.Default)
+        )
+        viewModel.state.test {
+            awaitItem()
+            viewModel.onEvent(TranslateEvent.ChangeTranslationText("test"))
+            awaitItem()
+
+            viewModel.onEvent(TranslateEvent.Translate)
+            val loadingState = awaitItem()
+            assertThat(loadingState.isTranslating).isTrue()
+
+
+            val resultState = awaitItem()
+            assertThat(resultState.isTranslating).isFalse()
+            assertThat(resultState.error).isNotNull()
         }
     }
 }

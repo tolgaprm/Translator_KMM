@@ -78,6 +78,9 @@ object Deps {
 
     const val hiltTesting = "com.google.dagger:hilt-android-testing:$hiltVersion"
 
+    private const val truthVersion = "1.1.3"
+    const val truth = "com.google.truth:truth:$truthVersion"
+
     // For handling permissions in tests
     private const val rulesVersion = "1.4.0"
     const val rules = "androidx.test:rules:$rulesVersion"
