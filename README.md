@@ -6,8 +6,6 @@ Note: I made this application following [Philipp Lackner](https://github.com/phi
 
 ## 🚀 Technologies and Frameworks
 
-Sure! Here's the updated list of technologies and frameworks with their respective emojis:
-
 ### Android Module
 
 - 💉 **Hilt**: A dependency injection framework that simplifies the process of managing dependencies in your app.
