@@ -35,6 +35,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.semantics
@@ -83,6 +84,7 @@ fun TranslateTextField(
                         .fillMaxWidth()
                         .padding(16.dp)
                         .aspectRatio(2f)
+                        .testTag(TestTags.idleTranslateTextField)
                 )
             } else {
                 TranslatedTextField(
@@ -93,7 +95,9 @@ fun TranslateTextField(
                     onCopyClick = onCopyClick,
                     onCloseClick = onCloseClick,
                     onSpeakerClick = onSpeakerClick,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag(TestTags.translatedTextField)
                 )
             }
         }
@@ -115,7 +119,9 @@ private fun TranslatedTextField(
     Column(
         modifier = modifier.padding(16.dp)
     ) {
-        LanguageDisplay(language = fromLanguage)
+        LanguageDisplay(
+            language = fromLanguage
+        )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = fromText,
@@ -145,7 +151,9 @@ private fun TranslatedTextField(
         Divider()
         Spacer(modifier = Modifier.height(16.dp))
 
-        LanguageDisplay(language = toLanguage)
+        LanguageDisplay(
+            language = toLanguage
+        )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = toText,
