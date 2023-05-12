@@ -41,6 +41,9 @@ The text-to-speech feature uses the Android and iOS platforms' built-in text-to-
 
 The voice recognition feature uses the Android and iOS platforms' built-in voice recognition engines to convert the user's speech into text input. This feature is platform-specific.
 
+### Future Plans
+ - [ ] Determine the language of a string of text using [MLKit Language identification](https://developers.google.com/ml-kit/language/identification).
+
 ## 🚀 Getting Started
 
 To run the app, you need to have Android Studio and Xcode installed on your machine. You can then clone the project from GitHub and open it in Android Studio or Xcode, depending on which platform you want to run the app on.
