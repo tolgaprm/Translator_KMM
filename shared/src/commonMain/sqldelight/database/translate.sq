@@ -22,3 +22,7 @@ INTO historyEntity (
     toText,
     timestamp
 ) VALUES (?,?,?,?,?,?);
+
+deleteHistoryEntity:
+DELETE FROM historyEntity
+WHERE id =?;

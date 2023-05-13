@@ -133,6 +133,12 @@ class TranslateViewModel(
                 }
             }
 
+            is TranslateEvent.DeleteHistoryItem -> {
+                viewModelScope.launch {
+                    historyDataSource.deleteHistoryItem(event.id)
+                }
+            }
+
             TranslateEvent.StopChoosingLanguage -> {
                 _state.update {
                     it.copy(

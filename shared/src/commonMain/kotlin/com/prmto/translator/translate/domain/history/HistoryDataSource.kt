@@ -6,4 +6,6 @@ interface HistoryDataSource {
     fun getHistory(): CommonFlow<List<HistoryItem>>
 
     suspend fun insertHistoryItem(item: HistoryItem)
+
+    suspend fun deleteHistoryItem(itemId: Long)
 }

@@ -4,6 +4,7 @@ import android.speech.tts.TextToSpeech
 import android.widget.Toast
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -50,7 +51,7 @@ import com.prmto.translator.translate.presentation.TranslateState
 import kotlinx.coroutines.launch
 import java.util.Locale
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun TranslateScreen(
     state: TranslateState,
@@ -225,10 +226,16 @@ fun TranslateScreen(
                             }
                         }
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    onDelete = {
+                        historyItem.id?.let { id ->
+                            onEvent(TranslateEvent.DeleteHistoryItem(id))
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .animateItemPlacement()
                 )
             }
         }
     }
-
 }
