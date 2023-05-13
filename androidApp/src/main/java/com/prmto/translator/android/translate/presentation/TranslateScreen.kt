@@ -2,6 +2,9 @@ package com.prmto.translator.android.translate.presentation
 
 import android.speech.tts.TextToSpeech
 import android.widget.Toast
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -19,6 +23,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -42,6 +47,7 @@ import com.prmto.translator.android.translate.presentation.components.rememberTe
 import com.prmto.translator.translate.domain.translate.TranslateError
 import com.prmto.translator.translate.presentation.TranslateEvent
 import com.prmto.translator.translate.presentation.TranslateState
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -51,7 +57,8 @@ fun TranslateScreen(
     onEvent: (TranslateEvent) -> Unit
 ) {
     val context = LocalContext.current
-
+    val lazyListState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = state.error) {
         val message = when (state.error) {
@@ -95,6 +102,7 @@ fun TranslateScreen(
                 .fillMaxSize()
                 .padding(padding)
                 .padding(16.dp),
+            state = lazyListState,
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             item {
@@ -205,6 +213,17 @@ fun TranslateScreen(
                     item = historyItem,
                     onClick = {
                         onEvent(TranslateEvent.SelectHistoryItem(historyItem))
+                        coroutineScope.launch {
+                            if (lazyListState.firstVisibleItemIndex > 0) {
+                                lazyListState.animateScrollBy(
+                                    -lazyListState.firstVisibleItemScrollOffset.toFloat(),
+                                    animationSpec = spring(
+                                        dampingRatio = Spring.DampingRatioMediumBouncy,
+                                        stiffness = Spring.StiffnessLow
+                                    )
+                                )
+                            }
+                        }
                     },
                     modifier = Modifier.fillMaxWidth()
                 )
