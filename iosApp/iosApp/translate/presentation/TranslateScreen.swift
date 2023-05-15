@@ -71,13 +71,27 @@ struct TranslateScreen: View {
                         .listRowBackground(Color.backgroundColor)
                         
                         if !viewModel.state.history.isEmpty {
-                            Text("History")
-                                .font(.title)
-                                .bold()
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                            HStack{
+                                Text("History")
+                                    .font(.title)
+                                    .bold()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .listRowSeparator(.hidden)
+                                    .listRowBackground(Color.backgroundColor)
+                                Spacer()
+                                Button(
+                                    action: {
+                                        viewModel.onEvent(event: TranslateEvent.DeleteAllHistory())
+                                    }
+                                ) {
+                                    Text("Clear all")
+                                        .font(.caption)
+                                        .foregroundColor(.lightBlue)
+                                }
+                            }.padding()
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color.backgroundColor)
-                            
+                        
                             ForEach(viewModel.state.history, id: \.self.id){ item in
                                 TranslateHistoryItem(
                                     item: item,
@@ -88,7 +102,7 @@ struct TranslateScreen: View {
                                         }
                                     }
                                 ).listRowSeparator(.hidden)
-                                    .listRowBackground(Color.backgroundColor)
+                                .listRowBackground(Color.backgroundColor)
                                     
                             }
                             .onDelete(perform: {indexSet in
