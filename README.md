@@ -4,6 +4,17 @@ This is a translation app built using Kotlin Multiplatform Mobile (KMM), which a
 
 Note: I made this application following [Philipp Lackner](https://github.com/philipplackner) course. 
 
+## Demo
+
+### Android
+
+https://github.com/tolgaprm/Translator_KMM/assets/53945332/0cba5cb4-f104-47a3-a89b-c95736c045f6
+
+### iOS
+
+https://github.com/tolgaprm/Translator_KMM/assets/53945332/bbfec1b1-5cf9-428f-a0f4-fff70567de70
+
+
 ## 🚀 Technologies and Frameworks
 
 ### Android Module
