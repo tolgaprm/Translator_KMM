@@ -8,13 +8,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class FakeHistoryDataSource : HistoryDataSource {
 
-    private val _data = MutableStateFlow<List<HistoryItem>>(emptyList())
+    private val _data = MutableStateFlow<MutableList<HistoryItem>>(mutableListOf())
     override fun getHistory(): CommonFlow<List<HistoryItem>> {
         return _data.toCommonFlow()
     }
 
     override suspend fun insertHistoryItem(item: HistoryItem) {
         _data.value += item
+    }
+
+    override suspend fun deleteHistoryItem(itemId: Long) {
+        val item = _data.value.find { it.id == itemId } ?: return
+        _data.value.remove(element = item)
     }
 
 }

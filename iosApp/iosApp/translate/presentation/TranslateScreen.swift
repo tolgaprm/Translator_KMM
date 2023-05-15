@@ -89,7 +89,16 @@ struct TranslateScreen: View {
                                     }
                                 ).listRowSeparator(.hidden)
                                     .listRowBackground(Color.backgroundColor)
+                                    
                             }
+                            .onDelete(perform: {indexSet in
+                                for i in indexSet{
+                                    let deletedItem = viewModel.state.history[i] as UiHistoryItem
+                                    if (deletedItem.id != nil) {
+                                        viewModel.onEvent(event: TranslateEvent.DeleteHistoryItem(id: deletedItem.id as! Int64))
+                                    }
+                                }
+                            })
                         }
                     
                     }
