@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -28,6 +30,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -39,6 +42,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import com.prmto.translator.android.R
+import com.prmto.translator.android.core.theme.LightBlue
 import com.prmto.translator.android.core.util.TestTags
 import com.prmto.translator.android.translate.presentation.components.LanguageDropDown
 import com.prmto.translator.android.translate.presentation.components.SwapLanguagesButton
@@ -203,10 +207,27 @@ fun TranslateScreen(
             }
             item {
                 if (state.history.isNotEmpty()) {
-                    Text(
-                        text = stringResource(id = R.string.history),
-                        style = MaterialTheme.typography.h2
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.history),
+                            style = MaterialTheme.typography.h2
+                        )
+
+                        Text(
+                            text = stringResource(id = R.string.clear_all),
+                            style = MaterialTheme.typography.body1.copy(color = LightBlue),
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .clickable {
+                                    onEvent(TranslateEvent.DeleteAllHistory)
+                                }
+                                .padding(8.dp)
+                        )
+                    }
                 }
             }
             items(state.history) { historyItem ->

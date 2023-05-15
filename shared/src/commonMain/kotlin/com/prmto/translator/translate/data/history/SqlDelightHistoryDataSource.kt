@@ -39,4 +39,8 @@ class SqlDelightHistoryDataSource(
     override suspend fun deleteHistoryItem(itemId: Long) {
         queries.deleteHistoryEntity(itemId)
     }
+
+    override suspend fun deleteAllHistory() {
+        queries.deleteAllHistoryEntities()
+    }
 }

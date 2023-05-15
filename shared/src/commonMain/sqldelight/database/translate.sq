@@ -26,3 +26,6 @@ INTO historyEntity (
 deleteHistoryEntity:
 DELETE FROM historyEntity
 WHERE id =?;
+
+deleteAllHistoryEntities:
+DELETE FROM historyEntity;

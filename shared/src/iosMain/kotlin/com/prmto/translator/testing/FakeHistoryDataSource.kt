@@ -22,4 +22,7 @@ class FakeHistoryDataSource : HistoryDataSource {
         _data.value.remove(element = item)
     }
 
+    override suspend fun deleteAllHistory() {
+        _data.value.clear()
+    }
 }

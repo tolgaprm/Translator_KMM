@@ -18,4 +18,6 @@ sealed class TranslateEvent {
     data class SubmitVoiceResult(val result: String?) : TranslateEvent()
     object OnErrorSeen : TranslateEvent()
     data class DeleteHistoryItem(val id: Long) : TranslateEvent()
+
+    object DeleteAllHistory : TranslateEvent()
 }
