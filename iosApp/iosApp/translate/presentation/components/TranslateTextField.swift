@@ -53,7 +53,7 @@ struct TranslateTextField: View {
 struct TranslateTextField_Previews: PreviewProvider {
     static var previews: some View {
         TranslateTextField(
-            fromText: Binding(get: {"test"}, set: {value in }),
+            fromText: Binding(get: {""}, set: {value in }),
             toText: "",
             isTranslating: false,
             fromLanguage: UiLanguage(language: .english, imageName: "english"),
@@ -73,28 +73,37 @@ private extension TranslateTextField {
         let onTranslateEvent: (TranslateEvent) -> Void
         
         var body: some View{
-            TextEditor(text: $fromText)
-                .frame(
-                    maxWidth: .infinity,
-                    minHeight: 200,
-                    alignment: .topLeading
-                )
-                .padding()
-                .foregroundColor(Color.onSurface)
-                .overlay(alignment: .bottomTrailing){
-                    ProgressButton(
-                        text: "Translate",
-                        isLoading: isTranslating,
-                        onClick: {
-                            onTranslateEvent(TranslateEvent.Translate())
-                        }
+            ZStack(alignment: .topLeading){
+                if fromText.isEmpty{
+                    Text("Enter a text to translate")
+                        .foregroundColor(Color.primary.opacity(0.25))
+                        .padding()
+                        .padding(.leading,7)
+                        .padding(.top,5)
+                    
+                }
+                TextEditor(text: $fromText)
+                    .frame(
+                        maxWidth: .infinity,
+                        minHeight: 200
                     )
-                }
-                .padding(.trailing)
-                .padding(.bottom)
-                .onAppear{
-                    UITextView.appearance().backgroundColor = .clear
-                }
+                    .padding()
+                    .foregroundColor(Color.onSurface)
+                    .overlay(alignment: .bottomTrailing){
+                        ProgressButton(
+                            text: "Translate",
+                            isLoading: isTranslating,
+                            onClick: {
+                                onTranslateEvent(TranslateEvent.Translate())
+                            }
+                        )
+                    }
+                    .padding(.trailing)
+                    .padding(.bottom)
+                    .onAppear{
+                        UITextView.appearance().backgroundColor = .clear
+                    }
+            }
         }
     }
     
