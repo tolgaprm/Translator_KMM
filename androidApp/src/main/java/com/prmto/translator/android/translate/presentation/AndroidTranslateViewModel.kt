@@ -3,6 +3,7 @@ package com.prmto.translator.android.translate.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prmto.translator.translate.domain.history.HistoryDataSource
+import com.prmto.translator.translate.domain.identify.IdentifyLanguage
 import com.prmto.translator.translate.domain.translate.TranslateUseCase
 import com.prmto.translator.translate.presentation.TranslateEvent
 import com.prmto.translator.translate.presentation.TranslateViewModel
@@ -12,13 +13,15 @@ import javax.inject.Inject
 @HiltViewModel
 class AndroidTranslateViewModel @Inject constructor(
     private val translateUseCase: TranslateUseCase,
-    private val historyDataSource: HistoryDataSource
+    private val historyDataSource: HistoryDataSource,
+    private val identifyLanguage: IdentifyLanguage
 ) : ViewModel() {
 
     private val viewModel by lazy {
         TranslateViewModel(
             translateUseCase = translateUseCase,
             historyDataSource = historyDataSource,
+            identifyLanguage = identifyLanguage,
             coroutineScope = viewModelScope
         )
     }

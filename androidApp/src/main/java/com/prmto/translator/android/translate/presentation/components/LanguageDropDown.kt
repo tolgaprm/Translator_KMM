@@ -34,6 +34,7 @@ import com.prmto.translator.core.presentation.UiLanguage
 fun LanguageDropDown(
     language: UiLanguage,
     isOpen: Boolean,
+    isToLanguageDropDown: Boolean = false,
     onClick: () -> Unit,
     onDismiss: () -> Unit,
     onSelectLanguage: (UiLanguage) -> Unit,
@@ -45,6 +46,7 @@ fun LanguageDropDown(
             onDismissRequest = onDismiss
         ) {
             UiLanguage.allLanguages.forEach { language ->
+                if (isToLanguageDropDown && language == UiLanguage.byCode("detect")) return@forEach
                 LanguageDropDownItem(
                     language = language,
                     onClick = {

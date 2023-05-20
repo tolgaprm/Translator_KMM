@@ -62,6 +62,8 @@ dependencies {
 
     implementation(Deps.ktorAndroid)
 
+    implementation(Deps.mlKitIdentifyLanguage)
+
     androidTestImplementation(Deps.testRunner)
     androidTestImplementation(Deps.jUnit)
     androidTestImplementation(Deps.composeTesting)

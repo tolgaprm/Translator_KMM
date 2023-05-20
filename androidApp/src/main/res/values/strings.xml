@@ -19,7 +19,8 @@
     <string name="stop_recording">Stop recording</string>
     <string name="apply">Apply</string>
     <string name="record_again">Record again</string>
-    <string name="listening">Listening...</string>
+    <string name="listening">Listening…</string>
     <string name="start_talking">Click record and start talking</string>
     <string name="clear_all">Clear all</string>
+    <string name="language_not_supported">The langugage is not supported</string>
 </resources>

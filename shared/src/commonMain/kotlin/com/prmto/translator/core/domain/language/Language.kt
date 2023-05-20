@@ -5,6 +5,7 @@ enum class Language(
     val langCode: String,
     val langName: String
 ) {
+    DETECT_LANGUAGE("detect", "Detect"),
     ENGLISH("en", "English"),
     ARABIC("ar", "Arabic"),
     AZERBAIJANI("az", "Azerbaijani"),

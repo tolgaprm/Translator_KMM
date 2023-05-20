@@ -34,6 +34,7 @@ actual data class UiLanguage(
                 UiLanguage(
                     language = language,
                     drawableRes = when (language) {
+                        Language.DETECT_LANGUAGE -> R.drawable.identify_language
                         Language.ENGLISH -> R.drawable.english
                         Language.ARABIC -> R.drawable.arabic
                         Language.AZERBAIJANI -> R.drawable.azerbaijani
@@ -64,6 +65,6 @@ actual data class UiLanguage(
                         Language.UKRAINIAN -> R.drawable.ukrainian
                     }
                 )
-            }.sortedBy { it.language.langName }
+            }
     }
 }

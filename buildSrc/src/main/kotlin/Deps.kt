@@ -19,6 +19,10 @@ object Deps {
     private const val coilComposeVersion = "2.1.0"
     const val coilCompose = "io.coil-kt:coil-compose:$coilComposeVersion"
 
+    // ML KIT Identify Language
+    private const val mlKitIdentifyLanguageVersion = "17.0.4"
+    const val mlKitIdentifyLanguage = "com.google.mlkit:language-id:$mlKitIdentifyLanguageVersion"
+
     // KOTLIN DATE TIME
     private const val dateTimeVersion = "0.4.0"
     const val kotlinDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion"

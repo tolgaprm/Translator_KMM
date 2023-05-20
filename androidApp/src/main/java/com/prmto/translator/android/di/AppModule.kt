@@ -1,12 +1,16 @@
 package com.prmto.translator.android.di
 
 import android.app.Application
+import com.google.mlkit.nl.languageid.LanguageIdentification
+import com.google.mlkit.nl.languageid.LanguageIdentifier
+import com.prmto.translator.android.translate.domain.identify.IdentifyLanguageImpl
 import com.prmto.translator.database.TranslatorDatabase
 import com.prmto.translator.translate.data.history.SqlDelightHistoryDataSource
 import com.prmto.translator.translate.data.local.DatabaseDriverFactory
 import com.prmto.translator.translate.data.remote.HttpClientFactory
 import com.prmto.translator.translate.data.translate.KtorTranslateClient
 import com.prmto.translator.translate.domain.history.HistoryDataSource
+import com.prmto.translator.translate.domain.identify.IdentifyLanguage
 import com.prmto.translator.translate.domain.translate.TranslateClient
 import com.prmto.translator.translate.domain.translate.TranslateUseCase
 import com.squareup.sqldelight.db.SqlDriver
@@ -64,4 +68,20 @@ object AppModule {
             historyDataSource = dataSource
         )
     }
+
+    @Provides
+    @Singleton
+    fun provideLanguageIdentifier(): LanguageIdentifier {
+        return LanguageIdentification.getClient()
+    }
+
+    @Provides
+    @Singleton
+    fun provideIdentifyLanguage(
+        languageIdentifier: LanguageIdentifier
+    ): IdentifyLanguage {
+        return IdentifyLanguageImpl(languageIdentifier)
+    }
+
+
 }

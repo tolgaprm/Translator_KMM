@@ -4,6 +4,8 @@ import com.prmto.translator.core.domain.util.Resource
 import com.prmto.translator.core.domain.util.toCommonStateFlow
 import com.prmto.translator.core.presentation.UiLanguage
 import com.prmto.translator.translate.domain.history.HistoryDataSource
+import com.prmto.translator.translate.domain.identify.IdentifyLanguage
+import com.prmto.translator.translate.domain.translate.TranslateError
 import com.prmto.translator.translate.domain.translate.TranslateException
 import com.prmto.translator.translate.domain.translate.TranslateUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -20,9 +22,12 @@ import kotlinx.coroutines.launch
 class TranslateViewModel(
     private val translateUseCase: TranslateUseCase,
     private val historyDataSource: HistoryDataSource,
+    private val identifyLanguage: IdentifyLanguage,
     private val coroutineScope: CoroutineScope?
 ) {
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
+
+    private var identifyJob: Job? = null
 
     private val _state = MutableStateFlow(TranslateState())
     val state = combine(
@@ -184,12 +189,61 @@ class TranslateViewModel(
         }
     }
 
+    private fun identifyLanguage() {
+        val isDetectingLanguage = state.value.fromLanguage == UiLanguage.byCode("detect")
+        if (!isDetectingLanguage) return
+
+        identifyJob = viewModelScope.launch {
+
+            identifyLanguage.execute(
+                text = state.value.fromText,
+                onSuccess = { detectedLanguageCode ->
+                    kotlin.runCatching {
+                        _state.update {
+                            it.copy(
+                                fromLanguage = UiLanguage.byCode(detectedLanguageCode)
+                            )
+                        }
+                    }.onFailure { throwable ->
+                        if (throwable is IllegalArgumentException) {
+                            _state.update {
+                                it.copy(
+                                    error = TranslateError.LANGUAGE_NOT_SUPPORTED
+                                )
+                            }
+                        } else {
+                            _state.update {
+                                it.copy(
+                                    error = TranslateError.UNKNOWN_ERROR
+                                )
+                            }
+                        }
+                    }
+                },
+                onError = {
+                    _state.update {
+                        it.copy(
+                            error = it.error ?: TranslateError.UNKNOWN_ERROR
+                        )
+                    }
+                }
+            )
+        }
+    }
+
     private fun translate(state: TranslateState) {
         if (state.isTranslating || state.fromText.isBlank()) {
             return
         }
 
+        identifyJob?.cancel()
+        identifyLanguage()
+
         translateJob = viewModelScope.launch {
+            identifyJob?.join()
+            if (state.error != null || state.fromLanguage == UiLanguage.byCode("detect")) {
+                return@launch
+            }
             _state.update {
                 it.copy(
                     isTranslating = true

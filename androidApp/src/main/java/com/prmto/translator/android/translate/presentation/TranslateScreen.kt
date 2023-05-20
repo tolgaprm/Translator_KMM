@@ -71,6 +71,7 @@ fun TranslateScreen(
             TranslateError.ClIENT_ERROR -> context.getString(R.string.client_error)
             TranslateError.SERVER_ERROR -> context.getString(R.string.server_error)
             TranslateError.UNKNOWN_ERROR -> context.getString(R.string.unknown_error)
+            TranslateError.LANGUAGE_NOT_SUPPORTED -> context.getString(R.string.language_not_supported)
             else -> null
         }
 
@@ -142,6 +143,7 @@ fun TranslateScreen(
                     LanguageDropDown(
                         language = state.toLanguage,
                         isOpen = state.isChoosingToLanguage,
+                        isToLanguageDropDown = true,
                         onClick = {
                             onEvent(TranslateEvent.OpenToLanguageDropDown)
                         },
